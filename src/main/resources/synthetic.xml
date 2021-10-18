@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+
+    Copyright 2021 DIGITAL.AI
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+-->
+<synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd" xmlns="http://www.xebialabs.com/deployit/synthetic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <type type="launchdarkly.Server" extends="configuration.HttpConnection" >
+        <property name="scriptLocation" hidden="true" default="launchdarkly/Server.py"/>
+        <property name="token" password="true" category="Authentication" required="false" />
+    </type>
+
+    <type type="launchdarkly.Task" extends="xlrelease.PythonScript" virtual="true">
+        <property name="iconLocation" default="launchdarkly/logo.png" hidden="true" />
+        <property name="taskColor" hidden="true" default="#000000"/>
+        <property name="scriptLocation" default="launchdarkly/LaunchDarklyTask.py" hidden="true"/>
+        <property name="launchdarklyServer" category="input" label="Server" referenced-type="launchdarkly.Server" kind="ci" />
+        <property name="username" category="input" required="false" />
+        <property name="password" password="true" category="input" required="false" />
+        <property name="token" password="true" category="input" required="false" />
+        <property name="classReload" category="input" default="true" hidden="true" kind="boolean"/>
+    </type>
+
+    <type type="launchdarkly.listAllFeatures" extends="launchdarkly.Task">
+        <property name="projectKey" category="input" required="false" />
+        <property name="tag" category="input" required="false" description="Filter feature flags by tag"/>
+        <property name="items" category="output" kind="map_string_string" />
+        <property name="featureKeys" category="output" kind="list_of_string" />
+    </type>
+
+    <type type="launchdarkly.getFeatureFlagStatus" extends="launchdarkly.Task">
+        <property name="projectKey" category="input" required="false" />
+        <property name="environmentKey" category="input" required="false" />
+        <property name="featureKey" category="input" required="false" />
+        <property name="status" category="output" kind="boolean" />
+    </type>
+
+    <type type="launchdarkly.getListOfFeatureFlagStatuses" extends="launchdarkly.Task">
+        <property name="projectKey" category="input" required="false" />
+        <property name="environmentKey" category="input" required="false" />
+        <property name="featureList" category="input" required="false" kind="list_of_string"/>
+        <property name="statusList" category="output" kind="map_string_string" />
+    </type>
+
+    <type type="launchdarkly.setFeatureFlagStatus" extends="launchdarkly.Task">
+        <property name="projectKey" category="input" required="false" />
+        <property name="environmentKey" category="input" required="false" />
+        <property name="featureKey" category="input" required="false" />
+        <property name="status" category="input" kind="boolean" />
+        <property name="outStatus" category="output" kind="boolean" />
+    </type>
+
+    <type type="launchdarkly.setListOfFeatureFlagStatuses" extends="launchdarkly.Task">
+        <property name="projectKey" category="input" required="false" />
+        <property name="environmentKey" category="input" required="false" />
+        <property name="featureList" category="input" required="false" kind="list_of_string"/>
+        <property name="status" category="input" kind="boolean" />
+        <property name="statusList" category="output" kind="map_string_string" />
+    </type>
+
+</synthetic>

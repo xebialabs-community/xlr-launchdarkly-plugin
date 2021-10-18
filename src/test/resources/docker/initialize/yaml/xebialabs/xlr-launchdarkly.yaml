@@ -1,0 +1,8 @@
+---
+apiVersion: xl-release/v1
+kind: Templates
+spec:
+- name: LaunchdarklyDev
+  type: launchdarkly.Server
+  url: https://app.launchdarkly.com/
+  token: !value "launchdarkly_Server_LaunchdarklyDev_token"

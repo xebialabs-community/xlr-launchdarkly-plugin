@@ -1,0 +1,121 @@
+---
+apiVersion: xl-release/v1
+kind: Templates
+spec:
+- directory: LaunchDarkly
+  children:
+  - template: UseCaseTests
+    scheduledStartDate: 2021-10-15T13:00:00Z
+    phases:
+    - phase: List Features
+      tasks:
+      - name: List All of the Features
+        type: launchdarkly.listAllFeatures
+        launchdarklyServer: LaunchdarklyDev
+        projectKey: default
+        variableMapping:
+          pythonScript.featureKeys: "${featureKeys}"
+      - name: List All of the Features with tag filter
+        type: launchdarkly.listAllFeatures
+        launchdarklyServer: LaunchdarklyDev
+        projectKey: default
+        tag: "${tags}"
+        variableMapping:
+          pythonScript.featureKeys: "${featureKeys}"
+      - name: gate
+        type: xlrelease.GateTask
+        owner: admin
+      color: '#0079BC'
+    - phase: Get Feature Status
+      tasks:
+      - name: Get Feature Flag Status
+        type: launchdarkly.getFeatureFlagStatus
+        launchdarklyServer: LaunchdarklyDev
+        projectKey: default
+        environmentKey: production
+        featureKey: "${feature1}"
+      - name: Get Feature Flag Status
+        type: launchdarkly.getFeatureFlagStatus
+        launchdarklyServer: LaunchdarklyDev
+        projectKey: default
+        environmentKey: test
+        featureKey: "${feature1}"
+      - name: Get Lsit of Feature Flag Statuses (Test)
+        type: launchdarkly.getListOfFeatureFlagStatuses
+        launchdarklyServer: LaunchdarklyDev
+        projectKey: default
+        environmentKey: test
+        variableMapping:
+          pythonScript.featureList: "${featureKeys}"
+      - name: Get Lsit of Feature Flag Statuses (Production)
+        type: launchdarkly.getListOfFeatureFlagStatuses
+        launchdarklyServer: LaunchdarklyDev
+        projectKey: default
+        environmentKey: production
+        variableMapping:
+          pythonScript.featureList: "${featureKeys}"
+      - name: gate
+        type: xlrelease.GateTask
+        owner: admin
+      color: '#0079BC'
+    - phase: Set Feature Flag Status
+      tasks:
+      - name: "Enable ${feature1}"
+        type: launchdarkly.setFeatureFlagStatus
+        launchdarklyServer: LaunchdarklyDev
+        projectKey: default
+        environmentKey: test
+        featureKey: "${feature1}"
+      - name: gate
+        type: xlrelease.GateTask
+        owner: admin
+      - name: "Disable ${feature1}"
+        type: launchdarkly.setFeatureFlagStatus
+        launchdarklyServer: LaunchdarklyDev
+        projectKey: default
+        environmentKey: test
+        featureKey: "${feature1}"
+        ^status: true
+      - name: gate
+        type: xlrelease.GateTask
+        owner: admin
+      - name: Enable List
+        type: launchdarkly.setListOfFeatureFlagStatuses
+        launchdarklyServer: LaunchdarklyDev
+        projectKey: default
+        environmentKey: test
+        ^status: true
+        variableMapping:
+          pythonScript.featureList: "${featureKeys}"
+      - name: gate
+        type: xlrelease.GateTask
+        owner: admin
+      - name: Disable List
+        type: launchdarkly.setListOfFeatureFlagStatuses
+        launchdarklyServer: LaunchdarklyDev
+        projectKey: default
+        environmentKey: test
+        variableMapping:
+          pythonScript.featureList: "${featureKeys}"
+      - name: gate
+        type: xlrelease.GateTask
+        owner: admin
+      color: '#0079BC'
+    variables:
+    - type: xlrelease.ListStringVariable
+      key: featureKeys
+      requiresValue: false
+      showOnReleaseStart: false
+    - type: xlrelease.StringVariable
+      key: feature1
+      requiresValue: false
+      value: demo-feature-1
+    - type: xlrelease.StringVariable
+      key: feature2
+      requiresValue: false
+      value: demoFeature2
+    - type: xlrelease.StringVariable
+      key: tags
+      requiresValue: false
+      value: tag1
+    riskProfile: Default risk profile
