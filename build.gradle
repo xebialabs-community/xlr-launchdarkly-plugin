@@ -27,7 +27,6 @@ if (!project.hasProperty('release.useLastTag')) {
 
 sourceSets.main.resources.srcDirs = ["src/main/jython", "src/main/resources"]
 
-
 license {
   header rootProject.file('License.md')
   strictCheck false
