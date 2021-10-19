@@ -22,7 +22,3 @@ jobs:
           prerelease: false
           files: |
             ./build/libs/xlr-launchdarkly-plugin-*.*
-
-    © 2021 GitHub, Inc.
-    Terms
-    Privacy
