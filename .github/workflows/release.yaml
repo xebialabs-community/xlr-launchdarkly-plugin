@@ -18,7 +18,7 @@ jobs:
         run: ./gradlew clean build --info --stacktrace
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          repo_token: "${{ secrets.GITHUBTOKEN }}"
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           files: |
             ./build/libs/xlr-launchdarkly-plugin-*.*
