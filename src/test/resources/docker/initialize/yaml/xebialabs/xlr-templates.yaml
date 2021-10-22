@@ -69,7 +69,7 @@ spec:
       color: '#0079BC'
     - phase: Set Feature Flag Status
       tasks:
-      - name: "Enable ${feature1}"
+      - name: "Disable ${feature1}"
         type: launchdarkly.setFeatureFlagStatus
         launchdarklyServer: LaunchdarklyDev
         projectKey: default
@@ -78,7 +78,7 @@ spec:
       - name: gate
         type: xlrelease.GateTask
         owner: admin
-      - name: "Disable ${feature1}"
+      - name: "Enable ${feature1}"
         type: launchdarkly.setFeatureFlagStatus
         launchdarklyServer: LaunchdarklyDev
         projectKey: default

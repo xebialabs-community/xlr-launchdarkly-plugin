@@ -21,16 +21,16 @@ HTTP_SUCCESS = sets.Set([200, 201, 202, 203, 204, 205, 206, 207, 208])
 HTTP_ERROR = sets.Set([400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410,412, 413, 414, 415])
 
 class LaunchDarkly_Client(object):
-    def __init__(self, httpConnection, username=None, password=None, token=None):
+    def __init__(self, httpConnection, token=None):
         self.httpConnection = httpConnection
         self.logger = LoggerFactory.getLogger("LaunchDarkly")
         if token == None:
             self.token = httpConnection['token']
-        self.httpRequest = HttpRequest(httpConnection, username, password, token)
+        self.httpRequest = HttpRequest(httpConnection, token)
 
     @staticmethod
-    def create_client(httpConnection, username=None, password=None, token=None):
-        return LaunchDarkly_Client(httpConnection, username, password, token)
+    def create_client(httpConnection, token=None):
+        return LaunchDarkly_Client(httpConnection, token)
 
     def testServer(self):
         launchDarklyUrl = 'api/v2/tokens'

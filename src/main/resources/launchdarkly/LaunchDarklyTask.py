@@ -14,7 +14,7 @@ from launchdarkly.LaunchDarklyClient import LaunchDarkly_Client
 import org.slf4j.LoggerFactory as LoggerFactory
 
 logger = LoggerFactory.getLogger("LaunchDarkly")
-launchDarkly = LaunchDarkly_Client.create_client(launchdarklyServer, username, password, token)
+launchDarkly = LaunchDarkly_Client.create_client(launchdarklyServer, token)
 method = str(task.getTaskType()).lower().replace('.', '_')
 logger.error("Call LaunchDarkly Method %s" % method)
 

@@ -14,6 +14,20 @@
 
     <type type="launchdarkly.Server" extends="configuration.HttpConnection" >
         <property name="scriptLocation" hidden="true" default="launchdarkly/Server.py"/>
+        <property name="username" default="NONE" hidden="true"/>
+        <property name="password" password="true" default="NONE" hidden="true"/>
+        <property name="domain" default="NONE" hidden="true"/>
+        <property name="clientId" default="empty" hidden="true"/>
+        <property name="clientSecret" default="empty" hidden="true" password="true"/>
+        <property name="scope" default="empty" hidden="true"/>
+        <property name="accessTokenUrl" default="empty" hidden="true"/>
+        <property name="authenticationMethod" kind="enum"
+                  enum-class="com.xebialabs.xlrelease.domain.configuration.HttpConnection$AuthenticationMethod"
+                  hidden="true" default="Basic">
+            <enum-values>
+                <value>Basic</value>
+            </enum-values>
+        </property>
         <property name="token" password="true" category="Authentication" required="false" />
     </type>
 
@@ -22,8 +36,6 @@
         <property name="taskColor" hidden="true" default="#000000"/>
         <property name="scriptLocation" default="launchdarkly/LaunchDarklyTask.py" hidden="true"/>
         <property name="launchdarklyServer" category="input" label="Server" referenced-type="launchdarkly.Server" kind="ci" />
-        <property name="username" category="input" required="false" />
-        <property name="password" password="true" category="input" required="false" />
         <property name="token" password="true" category="input" required="false" />
         <property name="classReload" category="input" default="true" hidden="true" kind="boolean"/>
     </type>
