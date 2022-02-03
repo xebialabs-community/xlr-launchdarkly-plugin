@@ -1,0 +1,48 @@
+{
+  "id": {
+    "artifactId": "xlr-launchdarkly-plugin",
+    "groupId": "com.xebialabs.xlrelease.plugins",
+    "version": "2.0.5"
+  },
+  "metadata": {
+	  "updatedDate": "2022-01-31",
+    "logo" : "https://github.com/xebialabs-community/xlr-launchdarkly-plugin/raw/main/src/main/resources/launchdarkly/logo.png",
+    "popularity":"3",
+    "rating" : "3",
+    "reviewed" : "10",
+    "capability": ["LaunchDarkly Release Plugin"],
+    "categories": [
+      "Release orchestration"
+    ],
+    "description": "The plugin provides the ability to interact with LaunchDarkly as part of your templates and releases.",
+    "features": [
+      "Deployment and associated operations"
+    ],
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/xebialabs-community/xlr-launchdarkly-plugin"
+      },
+      {
+        "name": "Documentation",
+        "url": "https://github.com/xebialabs-community/xlr-launchdarkly-plugin#readme"
+      }
+    ],
+    "maturity": "Mature",
+    "name": "LaunchDarkly Plugin",
+    "requirements": {
+      "product": "Release",
+      "versions": [
+        "== 10.4.x","10.3.x","10.2.x","10.1.x","10.0.x"
+      ]
+    },
+    "screenshots": [
+    ],
+    "supportedBy": "Community",
+    "author": {
+        "author": [],
+        "Community": ["CSM"],
+        "Partner": []
+    }
+  }
+}
