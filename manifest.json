@@ -10,9 +10,9 @@
     "popularity":"3",
     "rating" : "3",
     "reviewed" : "10",
-    "capability": ["LaunchDarkly Release Plugin"],
+    "capability": ["Feature Management"],
     "categories": [
-      "Release orchestration"
+      "Release orchestration" , "Feature Management"
     ],
     "description": "The plugin provides the ability to interact with LaunchDarkly as part of your templates and releases.",
     "features": [
